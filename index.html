@@ -12,10 +12,33 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Official n8n Chat Widget CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
   </head>
   <body class="bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 antialiased min-h-screen">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Official n8n Chatbot Widget Initialization -->
+    <script type="module">
+      import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+      createChat({
+        webhookUrl: 'https://tejaswinigatta.app.n8n.cloud/webhook/c215f943-5669-43fa-996a-b5d18aafd339/chat',
+        initialMessages: [
+          'Hi there! 👋',
+          'I am your TaskFlow assistant powered by n8n. How can I help you manage your tasks today?'
+        ],
+        i18n: {
+          en: {
+            title: 'TaskFlow Assistant',
+            subtitle: 'Powered by n8n workflow',
+            footer: '',
+            getStarted: 'New Conversation',
+            inputPlaceholder: 'Type a message to TaskFlow AI...',
+          },
+        },
+      });
+    </script>
   </body>
 </html>
 

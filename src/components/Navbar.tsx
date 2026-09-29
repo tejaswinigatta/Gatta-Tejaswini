@@ -1,11 +1,12 @@
 import React from 'react';
-import { CheckSquare, Moon, Sun, Plus, RotateCcw } from 'lucide-react';
+import { CheckSquare, Moon, Sun, Plus, RotateCcw, Bot } from 'lucide-react';
 import { ViewSection } from '../types/todo';
 
 interface NavbarProps {
   currentSection: ViewSection;
   onSelectSection: (section: ViewSection) => void;
   onOpenNewTaskModal: () => void;
+  onOpenChat?: () => void;
   onResetDemo: () => void;
   theme: 'light' | 'dark';
   onToggleTheme: () => void;
@@ -21,6 +22,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   currentSection,
   onSelectSection,
   onOpenNewTaskModal,
+  onOpenChat,
   onResetDemo,
   theme,
   onToggleTheme,
@@ -108,11 +110,23 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Zone 3: Primary Actions */}
         <div className="flex items-center gap-2">
+          {/* n8n AI Assistant button */}
+          {onOpenChat && (
+            <button
+              onClick={onOpenChat}
+              title="Open n8n Task Assistant"
+              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl bg-gradient-to-r from-orange-500/10 via-rose-500/10 to-indigo-500/10 hover:from-orange-500/20 hover:to-indigo-500/20 text-neutral-800 dark:text-neutral-100 border border-neutral-300/80 dark:border-neutral-700 transition-all cursor-pointer"
+            >
+              <Bot className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+              <span className="hidden sm:inline">n8n AI</span>
+            </button>
+          )}
+
           {/* Reset Demo button for quick review/demo in college/presentation */}
           <button
             onClick={onResetDemo}
             title="Reset sample tasks"
-            className="p-2 text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+            className="p-2 text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
             aria-label="Reset to sample tasks"
           >
             <RotateCcw className="w-4 h-4" />
@@ -122,7 +136,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={onToggleTheme}
             title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            className="p-2 text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+            className="p-2 text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
             aria-label="Toggle color theme"
           >
             {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4" />}

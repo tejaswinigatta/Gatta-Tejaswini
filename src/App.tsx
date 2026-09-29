@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import confetti from 'canvas-confetti';
-import { Plus, CheckCheck, Trash2, Undo2, Sparkles, Filter } from 'lucide-react';
+import { Plus, CheckCheck, Trash2, Undo2, Sparkles, Filter, Bot } from 'lucide-react';
 
 import { Task, ViewSection, SortOption } from './types/todo';
 import {
@@ -113,6 +113,14 @@ export default function App() {
       urgentOrHighCount,
     };
   }, [tasks]);
+
+  // Open the official n8n Chatbot widget
+  const handleOpenN8nChat = useCallback(() => {
+    const toggleBtn = document.querySelector('.chat-window-toggle') as HTMLElement;
+    if (toggleBtn) {
+      toggleBtn.click();
+    }
+  }, []);
 
   // Handler: Toggle Task Completed
   const handleToggleComplete = useCallback((id: string) => {
@@ -357,6 +365,7 @@ export default function App() {
           setTaskToEdit(null);
           setIsModalOpen(true);
         }}
+        onOpenChat={handleOpenN8nChat}
         onResetDemo={handleResetDemo}
         theme={theme}
         onToggleTheme={toggleTheme}
@@ -478,14 +487,14 @@ export default function App() {
         </section>
       </main>
 
-      {/* Floating Action Button for Rapid Task Creation */}
+      {/* Floating Action Button for Rapid Task Creation (positioned alongside official n8n chat toggle) */}
       <button
         onClick={() => {
           setTaskToEdit(null);
           setIsModalOpen(true);
         }}
         aria-label="Add new task"
-        className="fixed bottom-6 right-6 z-40 flex items-center gap-2 px-4 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-950 font-semibold text-xs sm:text-sm rounded-full shadow-lg hover:shadow-xl hover:bg-neutral-800 dark:hover:bg-neutral-100 active:scale-95 transition-all cursor-pointer"
+        className="fixed bottom-5 right-20 sm:right-24 z-30 flex items-center gap-2 px-4 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-950 font-semibold text-xs sm:text-sm rounded-full shadow-lg hover:shadow-xl hover:bg-neutral-800 dark:hover:bg-neutral-100 active:scale-95 transition-all cursor-pointer"
       >
         <Plus className="w-5 h-5 stroke-[2.5]" />
         <span className="hidden sm:inline">Add Task</span>
